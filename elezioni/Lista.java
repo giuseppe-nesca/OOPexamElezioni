@@ -28,8 +28,10 @@ public class Lista {
 			throws CandidatoNonValido {
 		if(!capolista.isCapolista()){
 			this.capolista = capolista;
+			Candidato candidato = (Candidato) capolista;
+			candidato.setCapolista(true);
 		}else{
-			throw new CandidatoNonValido();
+			throw new CandidatoNonValido("il cittadino selezionato e' gia' capolista di una lista");
 		}
 	}
 
@@ -37,8 +39,10 @@ public class Lista {
 			throws CandidatoNonValido {
 		if(!capolista.isCandidato()){
 			candidati.add(capolista);
+			Candidato candidato = (Candidato) capolista;
+			candidato.setCandidato(true);
 		}else{
-			throw new CandidatoNonValido();
+			throw new CandidatoNonValido("il cittadino selezionato e' gia' in una lista");
 		}
 	}
 
