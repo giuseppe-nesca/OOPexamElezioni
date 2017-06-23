@@ -2,14 +2,15 @@ package elezioni;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import sun.net.www.content.audio.wav;
-import sun.print.resources.serviceui;
 
 
 public class Elezione {
 	
-	Collection<Cittadino>elettori = new ArrayList<>();
+	private Collection<Cittadino>elettori = new ArrayList<>();
+	private Map<String,Lista> liste = new HashMap<>();
 
 	public Elezione(){
 		
@@ -36,6 +37,7 @@ public class Elezione {
 	}
 	
 	public void registraLista(Lista lista){
+		liste.put(lista.getNome(), lista);
 	}
 
     /**

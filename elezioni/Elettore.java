@@ -3,9 +3,9 @@ package elezioni;
 public class Elettore implements Cittadino {
 	
 	private String nome, cognome;
-	boolean haVotato = false;
-	boolean isCapolista = false;
-	boolean isCandidato = false;
+	private boolean haVotato = false;
+	private boolean isCapolista = false;
+	private boolean isCandidato = false;
 	
 	public Elettore(String nome, String cognome){
 		this.nome = nome;
