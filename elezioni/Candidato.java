@@ -6,6 +6,7 @@ public class Candidato implements Cittadino {
 	private boolean haVotato = false;
 	private boolean isCapolista = false;
 	private boolean isCandidato = true;
+	private int numVoti = 0;
 	
 	public Candidato(String nome, String cognome){
 		this.nome = nome;
@@ -39,7 +40,11 @@ public class Candidato implements Cittadino {
 
 	@Override
 	public long getNumeroVoti() {
-		return 0;
+		return numVoti;
+	}
+	
+	public void addVoto(){
+		numVoti++;
 	}
 	
 	public void setCandidato(boolean bool){

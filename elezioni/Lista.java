@@ -9,6 +9,7 @@ public class Lista {
 	private String nome, motto;
 	private Cittadino capolista;
 	private Collection<Cittadino> candidati = new ArrayList<>();
+	private int numVoti = 0;
 	
 	public Lista(String nome, String motto){
 		this.nome = nome;
@@ -60,10 +61,14 @@ public class Lista {
 	
 	
 	public long getNumeroVoti(){
-		return -1;
+		return numVoti;
 	}
 
 	public double getPercentualeVoti(){
 		return -1.1;
+	}
+	
+	public void addVoto(){
+		numVoti++;
 	}
 }

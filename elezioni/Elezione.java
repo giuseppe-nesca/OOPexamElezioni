@@ -50,6 +50,20 @@ public class Elezione {
      */	
 	public void vota(Cittadino votante, String lista, String nome, String cognome)
 		throws TentatoDoppioVoto, TaglioNonPermesso{
+		if(votante.haVotato()){
+			throw new TentatoDoppioVoto(""+votante.getCognome() + " " + votante.getCognome() + "ha tentato di votare piu' di una volta");
+		}
+		Lista list = liste.get(lista);
+		Collection<Cittadino> candidati = list.getCandidati();
+		for (Cittadino cittadino : candidati) {
+			if( cittadino.getCognome() == cognome && cittadino.getNome() == nome ){
+				Candidato candidato = (Candidato) cittadino;
+				candidato.addVoto();
+				list.addVoto();
+				return;
+			}
+		}
+		throw new TaglioNonPermesso("il candidato selezionato dall'elettore non e' esistente nella lista selezionata pertanto la votazione e' invalida");
 	}
 
 	/**
@@ -59,6 +73,11 @@ public class Elezione {
 	 */	
 	public void vota(Cittadino votante, String lista)
 		throws TentatoDoppioVoto{
+		if(votante.haVotato()){
+			throw new TentatoDoppioVoto(""+votante.getCognome() + " " + votante.getCognome() + "ha tentato di votare piu' di una volta");
+		}
+		Lista list = liste.get(lista);
+		list.addVoto();
 	}
 	
 	public long getNumeroVotanti(){
