@@ -1,23 +1,37 @@
 package elezioni;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
+import sun.net.www.content.audio.wav;
+import sun.print.resources.serviceui;
 
 
 public class Elezione {
+	
+	Collection<Cittadino>elettori = new ArrayList<>();
 
 	public Elezione(){
 		
 	}
 	
 	public Cittadino aggiungiElettore(String nome, String cognome){
-		return null;
+		Cittadino cittadino = new Elettore(nome, cognome);
+		elettori.add(cittadino);
+		return cittadino;
 	}
 	
 	public Collection getElettori(){
-		return null;
+		return elettori;
 	}
 	
 	public Cittadino getElettore(String nome, String cognome){
+		for (Cittadino cittadino : elettori) {
+			if(cittadino.getNome() == nome && cittadino.getCognome() == cognome){
+				return cittadino;
+			}
+		}
+		System.out.println("Cittadino non presente in elettori");
 		return null;
 	}
 	
@@ -28,7 +42,7 @@ public class Elezione {
      * Il cittadino votante esprime un voto per la lista ed 
      * un voto di preferenza per il candidato identificato
      * da nome e cognome
-     * @throws TentatoDoppioVoto se il cittadino ha già votato
+     * @throws TentatoDoppioVoto se il cittadino ha giï¿½ votato
      * @throws TaglioNonPermesso se il candidato per cui si esprime
      * 							la preferenza non appartiene alla lista
      */	
@@ -39,7 +53,7 @@ public class Elezione {
 	/**
 	 * Il cittadino votante esprime un voto per la lista
 	 * il voto di preferenza va automaticamente al capolista
-	 * @throws TentatoDoppioVoto se il cittadino ha già votato
+	 * @throws TentatoDoppioVoto se il cittadino ha giï¿½ votato
 	 */	
 	public void vota(Cittadino votante, String lista)
 		throws TentatoDoppioVoto{
