@@ -42,4 +42,7 @@ public class Elettore implements Cittadino {
 		return 0;
 	}
 
+	public void setHaVotato(boolean bool){
+		haVotato = bool;
+	}
 }

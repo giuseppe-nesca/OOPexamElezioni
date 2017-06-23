@@ -55,7 +55,7 @@ public class Lista {
 	 * Restuisce la collezione dei candidati
 	 * (NON include il capolista)
 	 */
-	public Collection getCandidati(){
+	public Collection<Cittadino> getCandidati(){
 		return candidati;
 	}
 	

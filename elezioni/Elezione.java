@@ -2,8 +2,10 @@ package elezioni;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 
@@ -60,6 +62,7 @@ public class Elezione {
 				Candidato candidato = (Candidato) cittadino;
 				candidato.addVoto();
 				list.addVoto();
+				((Elettore) votante).setHaVotato(true);
 				return;
 			}
 		}
@@ -78,18 +81,41 @@ public class Elezione {
 		}
 		Lista list = liste.get(lista);
 		list.addVoto();
+		((Elettore) votante).setHaVotato(true);
 	}
 	
 	public long getNumeroVotanti(){
-		return -1;
+		return elettori.stream()
+			.filter( e -> e.haVotato() )
+			.count();
 	}
 	
 	public Collection getRisultatiListe(){
-		return null;
+		return liste.values().stream()
+					.sorted(new Comparator<Lista>() {
+						@Override
+						public int compare(Lista l1, Lista l2){
+							return (int) (l2.getNumeroVoti() - l1.getNumeroVoti());
+						}
+					})
+					.collect(Collectors.toList())
+					;
 	}
 
 	public Collection getRisultatiCandidati(){
-		return null;
+		return liste.values().stream()
+					.flatMap( l -> l.getCandidati().stream() )
+					.sorted(new Comparator<Cittadino>() {
+						@Override
+						public int compare(Cittadino c1, Cittadino c2){
+							long conf = ((Candidato)c2).getNumeroVoti() - ((Candidato)c1).getNumeroVoti();
+							if (conf>0) return 1;
+							if (conf<0) return -1;
+							return 0;
+						}
+					})
+					.collect(Collectors.toList())
+				;
 	}
 	
 	
